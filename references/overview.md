@@ -33,7 +33,7 @@ https://www.marseille.fr/mairie/conseil-municipal/recueil-des-actes-administrati
 5. Enrichissement des données des arrêtés
     * Géolocalisation
         * [adresse.data.gouv.fr](https://adresse.data.gouv.fr/)
-        * points d'intérêt OSM
+        * points d'intérêt OpenStreetMap
     * Liage des entités bénéficiaires avec la base SIRENE
 6. Visualisation des données des arrêtés
     * afficher les données sur une carte interactive avec [folium](https://python-visualization.github.io/folium/), qui ressemble un peu à la [carte des terrasses de la ville de Paris](http://capgeo.sig.paris.fr/Apps/EtalagesTerrasses/)
