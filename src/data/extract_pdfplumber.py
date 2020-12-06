@@ -65,11 +65,11 @@ def page_has_column(page):
         "vertical_strategy": "explicit",         
         "horizontal_strategy": "explicit",          
         "explicit_vertical_lines": [height, width/2-15, height, width/2+15],
-        "explicit_horizontal_lines": [175, width, height-50, width],
+        "explicit_horizontal_lines": [100, width, height-50, width],
     }
 
     table = page.extract_table(setting)
-    if(table_is_empty(table)):
+    if(table_is_empty(table) and not page_is_empty(page)):
         return True
     else:
         print("Remove page n°", page.page_number)
@@ -92,10 +92,9 @@ def split_arrete(pdf, setting):
     result = ""
 
     previous_line_empty = False
-
     for page in pdf.pages:
         crop = page.crop((0, 50, page.width, page.height))
-        if page_has_column(crop) and not page_is_empty(crop):
+        if page_has_column(crop):
             table = crop.extract_table(setting)
             array = np.array(table)
             for column in range(2):
@@ -105,12 +104,13 @@ def split_arrete(pdf, setting):
                         temp = np.array2string(line)       #Renvoie un string de la forme <'string'>                  
                         string = temp[1:len(temp)-1]
                         
-                        regex = re.compile('^N° *[0-9]*_*[0-9]*_VDM *[A-Z]')
-                        regex2 = re.compile('^article [0-9]*  |^vu')
-                        if (previous_line_empty and string.startswith("N° ")) or re.match(regex, string):      #Si elle commence par N° et la ligne d'avant était vide alors c'est un arrêté, on met des espaces en plus
+                        regex = re.compile('^[0-9]*/[0-9]* *– *')
+                        regex1 = re.compile('^N° *[0-9]*_*[0-9]*_VDM *[A-Z]')
+                        regex2 = re.compile('^article [0-9]*  |^vu ')
+                        if (previous_line_empty and string.startswith("N° ")) or re.match(regex, string) or re.match(regex1, string):      #Detecte les arretés
                             result += "\n\n\n\n"
                         else:                      
-                            if re.match(regex2, string.lower()):       #Si elle commence par article et la ligne d'avant est vide alors c'est un article de l'arrêté
+                            if (previous_line_empty and string.lower().startswith("article ")) or re.match(regex2, string.lower()):       #Detecte les différentes parties de l'arreté
                                 result += "\n"
 
                         result +=  string + " "
@@ -127,28 +127,21 @@ def split_arrete(pdf, setting):
     output.close()
 
 
-pdf = pdfplumber.open(r"C:\Users\Anthony\Downloads\demi-ou-moitie-main\data\raw\raandeg534.pdf")
+pdf = pdfplumber.open(r"C:\Users\Anthony\Downloads\demi-ou-moitie-main\data\raw\raa_610.pdf")
 
 height = pdf.pages[0].height
 width = pdf.pages[0].width
 
+ys = []
+for y in range(0, int(height), 7):
+    ys.append(int(width))
+    ys.append(y)
+
 setting = {
         "vertical_strategy": "explicit",                    #Explicit: je définis les lignes de séparations
-        "horizontal_strategy": "text",                      #Text: Les lignes de textes définissent les séparations
+        "horizontal_strategy": "explicit",                      #Text: Les lignes de textes définissent les séparations
         "explicit_vertical_lines": [height, 30, height, width/2, height, width-30],     #Ligne explicit: A gauche, au mileu, a droite pour séparat les colonnes
-        "explicit_horizontal_lines": [],
-        "snap_tolerance": 3,
-        "join_tolerance": 3,
-        "edge_min_length": 3,
-        "min_words_vertical": 3,
-        "min_words_horizontal": 1,
-        "keep_blank_chars": False,
-        "text_tolerance": 3,
-        "text_x_tolerance": None,
-        "text_y_tolerance": None,
-        "intersection_tolerance": 50,
-        "intersection_x_tolerance": None,
-        "intersection_y_tolerance": None,
+        "explicit_horizontal_lines": ys,
     }
 
 
@@ -157,12 +150,4 @@ start = timeit.default_timer()
 split_arrete(pdf, setting)
 
 stop = timeit.default_timer()
-print('Run Time: ', stop - start)  
-
-
-
-
-
-
-
-
+print('Run Time: ', stop - start) 
