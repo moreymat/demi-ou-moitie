@@ -72,8 +72,6 @@ def clean_char_metadata(char):
     return new_char
 
 
-
-
 # Parameter: a pdf
 #
 # Ouput: pdf content splitted by its column, and cleaned of anything not needed
@@ -118,6 +116,40 @@ def pdf_cleaner(pdf):
     print("done")
 
 
+def is_same_metadata(c, c2):
+    if c["fontstyle"] == c2["fontstyle"] and c["size"] == c2["size"]:
+        return True
+    else:
+        return False
+
+
+# return a space char with same metadata as c
+def get_space_char(c):
+    space_char = {"text": " ", "fontstyle": c["fontstyle"], "size": c["size"]}
+    return space_char
+
+
+# compress metadatas for a section of an arrété
+def compress(line_list):
+    compressed = []
+    current_string = {}
+    current_string["text"] = ""
+    current_string["fontstyle"] = line_list[0][0]["fontstyle"]
+    current_string["size"] = line_list[0][0]["size"]
+    for line in line_list:
+        for c in line:
+            if is_same_metadata(current_string, c):
+                current_string["text"] += c["text"]
+            else:
+                compressed.append(current_string.copy())
+                current_string["text"] = c["text"]
+                current_string["fontstyle"] = c["fontstyle"]
+                current_string["size"] = c["size"]
+        if(current_string["text"][len(current_string["text"])-1] != " "):
+            current_string["text"] += " "
+    if len(current_string["text"]) > 0:
+        compressed.append(current_string)
+    return compressed
 
 
 # Parameter: clean_pdf: A pdf that went through cleaning
@@ -155,15 +187,16 @@ def get_data_from_clean_pdf(clean_pdf):
                     if re.match(regex_intro, string.lower()):
                         title_flag = False
                         intro_flag = True
-                        current_arrete["title"] = current_title
+                        current_arrete["title"] = compress(current_title)
                         current_title = []
                         current_intro.append(line)
                     else:
-                        current_title.append(line)
+                        if len(line) > 0:
+                            current_title.append(line)
                 else:
                     if intro_flag:
                         if re.match(regex_intro, string.lower()):
-                            current_intro_list.append(current_intro)
+                            current_intro_list.append(compress(current_intro))
                             current_intro = []
                             current_intro.append(line)
                         else:
@@ -172,7 +205,7 @@ def get_data_from_clean_pdf(clean_pdf):
                             ):
                                 intro_flag = False
                                 article_flag = True
-                                current_intro_list.append(current_intro)
+                                current_intro_list.append(compress(current_intro))
                                 current_intro = []
                                 current_arrete["intros"] = current_intro_list
                                 current_intro_list = []
@@ -184,7 +217,7 @@ def get_data_from_clean_pdf(clean_pdf):
                             if re.match(regex_article, string.lower()) and is_bold(
                                 line[0]["fontstyle"]
                             ):
-                                current_article_list.append(current_article)
+                                current_article_list.append(compress(current_article))
                                 current_article = []
                                 current_article.append(line)
                             else:
@@ -193,7 +226,9 @@ def get_data_from_clean_pdf(clean_pdf):
                                 ):
                                     article_flag = False
                                     title_flag = True
-                                    current_article_list.append(current_article)
+                                    current_article_list.append(
+                                        compress(current_article)
+                                    )
                                     current_article = []
                                     current_arrete["articles"] = current_article_list
                                     current_article_list = []
@@ -203,12 +238,9 @@ def get_data_from_clean_pdf(clean_pdf):
                                 else:
                                     current_article.append(line)
 
-    current_article_list.append(current_article)
-    current_article = []
+    current_article_list.append(compress(current_article))
     current_arrete["articles"] = current_article_list
-    current_article_list = []
     data["arretes"].append(current_arrete)
-    current_arrete = {}
     return data
 
 
