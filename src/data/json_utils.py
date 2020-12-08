@@ -1,6 +1,7 @@
 # functions to manipulate the datas
 
 import json
+import io
 
 # Parameter: json_path: path to json file
 #
@@ -12,25 +13,19 @@ def extract_text_from_json(json_path):
     result = ""
 
     for arrete in data["arretes"]:
-
+        
         for line in arrete["title"]:
-            for char in line:
-                result += char["text"]
-            result += " "
+            result += line["text"]
         result += "\n"
 
         for intro in arrete["intros"]:
             for line in intro:
-                for char in line:
-                    result += char["text"]
-                result += " "
+                result += line["text"]
             result += "\n"
 
         for article in arrete["articles"]:
             for line in article:
-                for char in line:
-                    result += char["text"]
-                result += " "
+                result += line["text"]
             result += "\n"
         result += "\n"
         result += "\n"
