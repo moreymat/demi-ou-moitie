@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import numpy as np
 import timeit
+import json
 
 # Parameter: table: 2D array
 #
@@ -50,14 +51,32 @@ def page_has_column(page):
         return False
 
 
-def is_bold(fontname):
+# Parameter: fontstyle from a character
+#
+# Output: true is the font is bold
+#         false if not
+def is_bold(fontstyle):
     r = re.compile(".*bold.*")
-    if re.match(r, fontname.lower()):
+    if re.match(r, fontstyle.lower()):
         return True
     else:
         return False
 
 
+def clean_char_metadata(char):
+    new_char = {
+        "text": char["text"],
+        "fontstyle": char["fontname"],
+        "size": float(char["size"]),
+    }
+    return new_char
+
+
+
+
+# Parameter: a pdf
+#
+# Ouput: pdf content splitted by its column, and cleaned of anything not needed
 def pdf_cleaner(pdf):
 
     clean_pdf = []
@@ -70,25 +89,28 @@ def pdf_cleaner(pdf):
             left_line = []
             right_line = []
             old_y = crop.chars[0]["y0"]
+            old_char = crop.chars[0]["text"]
             for char in crop.chars:
-                if char["x0"] < crop.width / 2:
-                    if char["size"] <= 10:
-                        if char["y0"] == old_y:
-                            left_line.append(char)
-                        else:
-                            old_y = char["y0"]
-                            left_column.append(left_line)
-                            left_line = []
-                            left_line.append(char)
-                else:
-                    if char["size"] <= 10:
-                        if char["y0"] == old_y:
-                            right_line.append(char)
-                        else:
-                            old_y = char["y0"]
-                            right_column.append(right_line)
-                            right_line = []
-                            right_line.append(char)
+                if not (old_char == " " and char["text"] == " "):
+                    old_char = char["text"]
+                    if char["x0"] < crop.width / 2:
+                        if char["size"] <= 10:
+                            if char["y0"] == old_y:
+                                left_line.append(clean_char_metadata(char))
+                            else:
+                                old_y = char["y0"]
+                                left_column.append(left_line)
+                                left_line = []
+                                left_line.append(clean_char_metadata(char))
+                    else:
+                        if char["size"] <= 10:
+                            if char["y0"] == old_y:
+                                right_line.append(clean_char_metadata(char))
+                            else:
+                                old_y = char["y0"]
+                                right_column.append(right_line)
+                                right_line = []
+                                right_line.append(clean_char_metadata(char))
             current_page.append(left_column)
             current_page.append(right_column)
             clean_pdf.append(current_page)
@@ -96,14 +118,23 @@ def pdf_cleaner(pdf):
     print("done")
 
 
-def get_arrete_from_clean_pdf(clean_pdf):
 
-    regex_arrete = re.compile("^N° *[0-9]+_+[0-9]+_VDM|^[0-9]+/[0-9]+ *– *")
-    regex_article = re.compile("^article *[0-9]* +|^Article *[0-9]* +|^ARTICLE *[0-9]* +")
+
+# Parameter: clean_pdf: A pdf that went through cleaning
+#
+# Output: A dictionnary
+def get_data_from_clean_pdf(clean_pdf):
+
+    regex_arrete = re.compile("^N° *[0-9]+_+[0-9]+|^[0-9]+/[0-9]+ *– *")
+    regex_article = re.compile(
+        "^article *[0-9]* +|^Article *[0-9]* +|^ARTICLE *[0-9]* +"
+    )
     regex_intro = re.compile("^vu +|^considérant")
 
-    arretes = []
-    current_arrete = []
+    data = {}
+    data["arretes"] = []
+    current_arrete = {}
+
     current_title = []
     current_intro_list = []
     current_intro = []
@@ -124,7 +155,7 @@ def get_arrete_from_clean_pdf(clean_pdf):
                     if re.match(regex_intro, string.lower()):
                         title_flag = False
                         intro_flag = True
-                        current_arrete.append(current_title)
+                        current_arrete["title"] = current_title
                         current_title = []
                         current_intro.append(line)
                     else:
@@ -137,13 +168,13 @@ def get_arrete_from_clean_pdf(clean_pdf):
                             current_intro.append(line)
                         else:
                             if re.match(regex_article, string.lower()) and is_bold(
-                                line[0]["fontname"]
+                                line[0]["fontstyle"]
                             ):
                                 intro_flag = False
                                 article_flag = True
                                 current_intro_list.append(current_intro)
                                 current_intro = []
-                                current_arrete.append(current_intro_list)
+                                current_arrete["intros"] = current_intro_list
                                 current_intro_list = []
                                 current_article.append(line)
                             else:
@@ -151,76 +182,57 @@ def get_arrete_from_clean_pdf(clean_pdf):
                     else:
                         if article_flag:
                             if re.match(regex_article, string.lower()) and is_bold(
-                                line[0]["fontname"]
+                                line[0]["fontstyle"]
                             ):
                                 current_article_list.append(current_article)
                                 current_article = []
                                 current_article.append(line)
                             else:
                                 if re.match(regex_arrete, string) and is_bold(
-                                    line[0]["fontname"]
+                                    line[0]["fontstyle"]
                                 ):
                                     article_flag = False
                                     title_flag = True
                                     current_article_list.append(current_article)
                                     current_article = []
-                                    current_arrete.append(current_article_list)
+                                    current_arrete["articles"] = current_article_list
                                     current_article_list = []
-                                    arretes.append(current_arrete)
-                                    current_arrete = []
+                                    data["arretes"].append(current_arrete)
+                                    current_arrete = {}
                                     current_title.append(line)
                                 else:
                                     current_article.append(line)
 
     current_article_list.append(current_article)
     current_article = []
-    current_arrete.append(current_article_list)
+    current_arrete["articles"] = current_article_list
     current_article_list = []
-    arretes.append(current_arrete)
-    current_arrete = []
-    return arretes
+    data["arretes"].append(current_arrete)
+    current_arrete = {}
+    return data
 
 
 start = timeit.default_timer()
 
-pdf = pdfplumber.open(
-    r"C:\Users\Anthony\Downloads\demi-ou-moitie-main\data\raw\raa_610.pdf"
-)
+data_path = Path("data/raw/")
+reps = os.listdir(data_path)
 
-clean_pdf = pdf_cleaner(pdf)
-arretes = get_arrete_from_clean_pdf(clean_pdf)
+for path in reps:
 
-result = ""
+    pdf_path = data_path / path
 
-for arrete in arretes:
-    titles = arrete[0]
-    intros = arrete[1]
-    articles = arrete[2]
-    for line in titles:
-        for char in line:
-            result += char["text"]
-        result += " "
-    result += "\n"
-    for intro in intros:
-        for line in intro:
-            for char in line:
-                result += char["text"]
-            result += " "
-        result += "\n"
-    for article in articles:
-        for line in article:
-            for char in line:
-                result += char["text"]
-            result += " "
-        result += "\n"
-    result += "\n"
-    result += "\n"
+    pdf = pdfplumber.open(pdf_path)
 
-output = io.open(
-    r"data/out/" + r"raa_610" + r".txt", "w", encoding="utf-8"
-)  # Ecrit dans le fichier output
-output.write(result)
-output.close()
+    pdf_name = os.path.splitext(path)[0]
+    print("Working on", pdf_name, "...")
+
+    clean_pdf = pdf_cleaner(pdf)
+    data = get_data_from_clean_pdf(clean_pdf)
+
+    with open(r"data/out/" + pdf_name + r".json", "w", encoding="utf-8") as outfile:
+        json.dump(data, outfile)
+
+    print("done")
 
 stop = timeit.default_timer()
 
