@@ -92,23 +92,22 @@ def pdf_cleaner(pdf):
                 if not (old_char == " " and char["text"] == " "):
                     old_char = char["text"]
                     if char["x0"] < crop.width / 2:
-                        if char["size"] <= 10:
-                            if char["y0"] == old_y:
-                                left_line.append(clean_char_metadata(char))
-                            else:
-                                old_y = char["y0"]
-                                left_column.append(left_line)
-                                left_line = []
-                                left_line.append(clean_char_metadata(char))
+                        if char["y0"] == old_y:
+                            left_line.append(clean_char_metadata(char))
+                        else:
+                            old_y = char["y0"]
+                            left_column.append(left_line)
+                            left_line = []
+                            left_line.append(clean_char_metadata(char))
+
                     else:
-                        if char["size"] <= 10:
-                            if char["y0"] == old_y:
-                                right_line.append(clean_char_metadata(char))
-                            else:
-                                old_y = char["y0"]
-                                right_column.append(right_line)
-                                right_line = []
-                                right_line.append(clean_char_metadata(char))
+                        if char["y0"] == old_y:
+                            right_line.append(clean_char_metadata(char))
+                        else:
+                            old_y = char["y0"]
+                            right_column.append(right_line)
+                            right_line = []
+                            right_line.append(clean_char_metadata(char))
             current_page.append(left_column)
             current_page.append(right_column)
             clean_pdf.append(current_page)
@@ -116,6 +115,7 @@ def pdf_cleaner(pdf):
     print("done")
 
 
+#check if both character have same metadatas
 def is_same_metadata(c, c2):
     if c["fontstyle"] == c2["fontstyle"] and c["size"] == c2["size"]:
         return True
@@ -145,7 +145,7 @@ def compress(line_list):
                 current_string["text"] = c["text"]
                 current_string["fontstyle"] = c["fontstyle"]
                 current_string["size"] = c["size"]
-        if(current_string["text"][len(current_string["text"])-1] != " "):
+        if current_string["text"][len(current_string["text"]) - 1] != " ":
             current_string["text"] += " "
     if len(current_string["text"]) > 0:
         compressed.append(current_string)
@@ -162,6 +162,7 @@ def get_data_from_clean_pdf(clean_pdf):
         "^article *[0-9]* +|^Article *[0-9]* +|^ARTICLE *[0-9]* +"
     )
     regex_intro = re.compile("^vu +|^considérant")
+    regex_admin = re.compile("^ *DIRECTION|^ *MAIRIES|^ *DELEGATION|^ *Mairie")
 
     data = {}
     data["arretes"] = []
@@ -172,71 +173,122 @@ def get_data_from_clean_pdf(clean_pdf):
     current_intro = []
     current_article_list = []
     current_article = []
+    current_admin = ""
+    current_big_admin = ""
 
     title_flag = True
     intro_flag = False
     article_flag = False
+    big_administration_flag = False
+    administration_flag = False
 
     for page in clean_pdf:
         for column in page:
             for line in column:
-                string = ""
-                for c in line:
-                    string += c["text"]
-                if title_flag:
-                    if re.match(regex_intro, string.lower()):
-                        title_flag = False
-                        intro_flag = True
-                        current_arrete["title"] = compress(current_title)
-                        current_title = []
-                        current_intro.append(line)
-                    else:
-                        if len(line) > 0:
-                            current_title.append(line)
-                else:
-                    if intro_flag:
+                if len(line) > 0 and line[0]["size"] < 10:
+                    administration_flag = False
+                    big_administration_flag = False
+                    string = ""
+                    for c in line:
+                        string += c["text"]
+                    if title_flag:
                         if re.match(regex_intro, string.lower()):
-                            current_intro_list.append(compress(current_intro))
-                            current_intro = []
+                            title_flag = False
+                            intro_flag = True
+                            
+                            current_arrete["admin1"] = current_big_admin
+                            current_arrete["admin2"] = current_admin
+                            current_arrete["title"] = compress(current_title)
+                            current_title = []
                             current_intro.append(line)
                         else:
-                            if re.match(regex_article, string.lower()) and is_bold(
-                                line[0]["fontstyle"]
-                            ):
-                                intro_flag = False
-                                article_flag = True
+                            if len(line) > 0:
+                                current_title.append(line)
+                    else:
+                        if intro_flag:
+                            if re.match(regex_intro, string.lower()):
                                 current_intro_list.append(compress(current_intro))
                                 current_intro = []
-                                current_arrete["intros"] = current_intro_list
-                                current_intro_list = []
-                                current_article.append(line)
-                            else:
                                 current_intro.append(line)
-                    else:
-                        if article_flag:
-                            if re.match(regex_article, string.lower()) and is_bold(
-                                line[0]["fontstyle"]
-                            ):
-                                current_article_list.append(compress(current_article))
-                                current_article = []
-                                current_article.append(line)
                             else:
-                                if re.match(regex_arrete, string) and is_bold(
+                                if re.match(regex_article, string.lower()) and is_bold(
                                     line[0]["fontstyle"]
                                 ):
-                                    article_flag = False
-                                    title_flag = True
+                                    intro_flag = False
+                                    article_flag = True
+                                    current_intro_list.append(compress(current_intro))
+                                    current_intro = []
+                                    current_arrete["intros"] = current_intro_list
+                                    current_intro_list = []
+                                    current_article.append(line)
+                                else:
+                                    current_intro.append(line)
+                        else:
+                            if article_flag:
+                                if re.match(regex_article, string.lower()) and is_bold(
+                                    line[0]["fontstyle"]
+                                ):
                                     current_article_list.append(
                                         compress(current_article)
                                     )
                                     current_article = []
-                                    current_arrete["articles"] = current_article_list
-                                    current_article_list = []
-                                    data["arretes"].append(current_arrete)
-                                    current_arrete = {}
-                                    current_title.append(line)
-                                else:
                                     current_article.append(line)
+                                else:
+                                    if re.match(regex_arrete, string) and is_bold(
+                                        line[0]["fontstyle"]
+                                    ):
+                                        article_flag = False
+                                        title_flag = True
+                                        current_article_list.append(
+                                            compress(current_article)
+                                        )
+                                        current_article = []
+                                        current_arrete[
+                                            "articles"
+                                        ] = current_article_list
+                                        current_article_list = []
+                                        data["arretes"].append(current_arrete)
+                                        current_arrete = {}
+                                        current_title.append(line)
+                                    else:
+                                        current_article.append(line)
+                elif len(line) > 0 and line[0]["size"] >= 10:
+
+                    string = ""
+                    for c in line:
+                        string += c["text"]
+
+                    if re.match(regex_admin, string):
+                        if is_bold(line[0]["fontstyle"]):
+                            if big_administration_flag:
+                                if current_big_admin[len(current_big_admin)-1] != " ":
+                                    current_big_admin += " "
+                                current_big_admin += string
+                            else:
+                                current_admin = ""
+                                big_administration_flag = True
+                                current_big_admin = string
+                        else:
+                            if administration_flag:
+                                if current_admin[len(current_admin)-1] != " ":
+                                    current_admin += " "
+                                current_admin += string
+                                big_administration_flag = False
+                            else:
+                                administration_flag = True
+                                big_administration_flag = False
+                                current_admin = string
+                    else:
+                        if big_administration_flag:
+                            if current_big_admin[len(current_big_admin)-1] != " ":
+                                current_big_admin += " "
+                            print("adding to big admin: ", string, line[0]["size"], line[0]["fontstyle"])
+                            current_big_admin += string
+                        elif administration_flag:
+                            if current_admin[len(current_admin)-1] != " ":
+                                current_admin += " "
+                            print("adding to admin: ", string, line[0]["size"], line[0]["fontstyle"])
+                            current_admin += string
 
     current_article_list.append(compress(current_article))
     current_arrete["articles"] = current_article_list
