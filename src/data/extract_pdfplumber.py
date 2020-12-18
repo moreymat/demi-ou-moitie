@@ -115,7 +115,7 @@ def pdf_cleaner(pdf):
     print("done")
 
 
-#check if both character have same metadatas
+# check if both character have same metadatas
 def is_same_metadata(c, c2):
     if c["fontstyle"] == c2["fontstyle"] and c["size"] == c2["size"]:
         return True
@@ -127,6 +127,26 @@ def is_same_metadata(c, c2):
 def get_space_char(c):
     space_char = {"text": " ", "fontstyle": c["fontstyle"], "size": c["size"]}
     return space_char
+
+
+def clean_line(line):
+    new_line = []
+    i = 0
+
+    while i < len(line) and not line[i]["text"].isdigit():
+        new_line.append(line[i])
+        i += 1
+    while i < len(line) and line[i]["text"].isdigit():
+        new_line.append(line[i])
+        i += 1
+    if i < len(line) and line[i]["text"] != " ":
+        new_line.append(get_space_char(line[i]))
+
+    while i < len(line):
+        new_line.append(line[i])
+        i += 1
+
+    return new_line
 
 
 # compress metadatas for a section of an arrété
@@ -195,7 +215,7 @@ def get_data_from_clean_pdf(clean_pdf):
                         if re.match(regex_intro, string.lower()):
                             title_flag = False
                             intro_flag = True
-                            
+
                             current_arrete["admin1"] = current_big_admin
                             current_arrete["admin2"] = current_admin
                             current_arrete["title"] = compress(current_title)
@@ -220,6 +240,7 @@ def get_data_from_clean_pdf(clean_pdf):
                                     current_intro = []
                                     current_arrete["intros"] = current_intro_list
                                     current_intro_list = []
+                                    line = clean_line(line)
                                     current_article.append(line)
                                 else:
                                     current_intro.append(line)
@@ -232,6 +253,7 @@ def get_data_from_clean_pdf(clean_pdf):
                                         compress(current_article)
                                     )
                                     current_article = []
+                                    line = clean_line(line)
                                     current_article.append(line)
                                 else:
                                     if re.match(regex_arrete, string) and is_bold(
@@ -261,7 +283,7 @@ def get_data_from_clean_pdf(clean_pdf):
                     if re.match(regex_admin, string):
                         if is_bold(line[0]["fontstyle"]):
                             if big_administration_flag:
-                                if current_big_admin[len(current_big_admin)-1] != " ":
+                                if current_big_admin[len(current_big_admin) - 1] != " ":
                                     current_big_admin += " "
                                 current_big_admin += string
                             else:
@@ -270,7 +292,7 @@ def get_data_from_clean_pdf(clean_pdf):
                                 current_big_admin = string
                         else:
                             if administration_flag:
-                                if current_admin[len(current_admin)-1] != " ":
+                                if current_admin[len(current_admin) - 1] != " ":
                                     current_admin += " "
                                 current_admin += string
                                 big_administration_flag = False
@@ -280,14 +302,12 @@ def get_data_from_clean_pdf(clean_pdf):
                                 current_admin = string
                     else:
                         if big_administration_flag:
-                            if current_big_admin[len(current_big_admin)-1] != " ":
+                            if current_big_admin[len(current_big_admin) - 1] != " ":
                                 current_big_admin += " "
-                            print("adding to big admin: ", string, line[0]["size"], line[0]["fontstyle"])
                             current_big_admin += string
                         elif administration_flag:
-                            if current_admin[len(current_admin)-1] != " ":
+                            if current_admin[len(current_admin) - 1] != " ":
                                 current_admin += " "
-                            print("adding to admin: ", string, line[0]["size"], line[0]["fontstyle"])
                             current_admin += string
 
     current_article_list.append(compress(current_article))
