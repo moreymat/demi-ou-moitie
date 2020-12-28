@@ -1,0 +1,73 @@
+[
+    {
+        "type": "terrasse",
+        "societe": "LA GRAINE DU PANIER SAS",
+        "adresses": [
+            "230 RUE D'ENDOUME 13007 MARSEILLE",
+            "1 RUE SAINT THOME 13002 MARSEILLE"
+        ],
+        "date": "13 octobre 2020",
+        "locs": [
+            43.3061,
+            5.3799
+        ],
+        "terrasse": [
+            [
+                7.0, 
+                4.0,
+                28.0,
+            ]
+        ],
+    },
+    {
+        "type": "terrasse",
+        "societe": "GARBIN ET COMPAGNIES SARL",
+        "adresses": [
+            "43 RUE DE SUEZ 13007 MARSEILLE",
+            ""
+        ],
+        "date": "13 octobre 2020",
+        "locs": [,],
+        "terrasse": [
+            [
+                2.20, 
+                1.5,
+                3.0,
+            ],
+            [
+                3.0, 
+                1.2,
+                4.0,
+            ],
+            [
+                1.0, 
+                1.0,
+                1.0,
+            ],
+        ],
+    },
+    {
+        "type": "pizza",
+        "societe": "MIAM LES PIZZA CO.",
+        "adresses": [
+            "230 RUE D\u2019ENDOUME 13007 MARSEILLE",
+            "48 RUE SAINT THOME 13002 MARSEILLE",
+            "176 RUE SAINT THOME 13002 MARSEILLE"
+        ],
+        "date": "20 novembre 2020",
+        "locs": [
+            [
+                43.29,
+                5.3818
+            ],
+            [
+                43.2967,
+                5.3944
+            ],
+            [
+                43.2967,
+                5.3818
+            ]
+        ]
+    }
+]
