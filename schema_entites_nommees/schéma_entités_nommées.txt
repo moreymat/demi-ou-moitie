@@ -1,0 +1,104 @@
+libelle_type:
+	type: texte
+	exemple: terrasse ou camion pizza
+
+
+raison_sociale:
+	type: texte
+	exemple: LA GRAINE DU PANIER SAS
+
+
+date_arrêté:
+	type: date
+	exemple: 13 octobre 2020
+
+
+
+===== Pour les terrases =====
+adresse:
+	type: texte
+	exemple: 230 RUE D'ENDOUME 13007 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+
+geo_point:
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+
+façade:
+	type: décimal
+	unité: m
+	exemple : 7.0
+
+
+largeur:
+	type: décimal
+	unité: m
+	exemple : 4.0
+
+
+surperficie:
+	type: décimal
+	unité: m²
+	exemple : 28.0
+
+
+materiaux:
+	type: texte
+	exemple : bois
+
+
+terrasse_couverte:
+	type: texte
+	exemple: oui/non
+
+
+
+===== Pour les camions pizzas =====
+adresse:
+	type: texte
+	exemple: 230 RUE D’ENDOUME 13007 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+	type: texte
+	exemple: 1 RUE SAINT THOME 13002 MARSEILLE
+
+
+geo_point:
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
+
+	type: geo_point_2d
+	exemple: [48.8873060772,2.386910918]
