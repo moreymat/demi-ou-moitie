@@ -9,8 +9,6 @@ def store_in_marseille(x, y):
     cx = 43.2961743
     cy = 5.3699525
 
-    print(math.sqrt((x - cx) ** 2 + (y - cy) ** 2))
-
     if math.sqrt((x - cx) ** 2 + (y - cy) ** 2) < 0.5:
         return True
     else:
