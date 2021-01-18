@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_05b987dba0ba49b2982567f594058d1f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_05b987dba0ba49b2982567f594058d1f" ></div>
+        
+</body>
+<script>    
+    
+            var map_05b987dba0ba49b2982567f594058d1f = L.map(
+                "map_05b987dba0ba49b2982567f594058d1f",
+                {
+                    center: [43.2961743, 5.3699525],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ac2f9e1986bb43149d4cbf595eb85e39 = L.tileLayer(
+                "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg",
+                {"attribution": "Map tiles by \u003ca href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by/3.0\"\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://creativecommons.org/licenses/by-sa/3.0\"\u003eCC BY SA\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var marker_4ae47b7ac461450290ddec7a3a52aa13 = L.marker(
+                [43.294734, 5.376581],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_294cd58f023c4720a064b510a7643975 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_4ae47b7ac461450290ddec7a3a52aa13.setIcon(icon_294cd58f023c4720a064b510a7643975);
+        
+    
+        var popup_6607ea899fdd4c1eb1e1ff7b964762a9 = L.popup({"maxWidth": 1000});
+
+        
+            var html_c96102650feb4d578f7a131d13197ed0 = $(`<div id="html_c96102650feb4d578f7a131d13197ed0" style="width: 100.0%; height: 100.0%;"><b>Sas </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 54 RUE VACON 13001 MARSEILLE <br><b>Taille de façade:</b> 4,50 m<br><b>Largeur:</b> 1,50 m</div>`)[0];
+            popup_6607ea899fdd4c1eb1e1ff7b964762a9.setContent(html_c96102650feb4d578f7a131d13197ed0);
+        
+
+        marker_4ae47b7ac461450290ddec7a3a52aa13.bindPopup(popup_6607ea899fdd4c1eb1e1ff7b964762a9)
+        ;
+
+        
+    
+    
+            marker_4ae47b7ac461450290ddec7a3a52aa13.bindTooltip(
+                `<div>
+                     <b>Sas </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fb89e0d6d4e24e2791610287855bbd1f = L.marker(
+                [43.299812, 5.374406],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_9c25355a5b0a4bae9ef3df3c3df9d561 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_fb89e0d6d4e24e2791610287855bbd1f.setIcon(icon_9c25355a5b0a4bae9ef3df3c3df9d561);
+        
+    
+        var popup_7e00e6e930da47599a4b67cccf32522e = L.popup({"maxWidth": 1000});
+
+        
+            var html_98dafbbb312d4a45ab8bd3cab8ac1c8d = $(`<div id="html_98dafbbb312d4a45ab8bd3cab8ac1c8d" style="width: 100.0%; height: 100.0%;"><b>Sarl </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 23 RUE SAINTE 13001 MARSEILLE <br><b>Taille de façade:</b> 4,40 m<br><b>Largeur:</b> 1,50 m<br><b>Superficie:</b> 7 m²</div>`)[0];
+            popup_7e00e6e930da47599a4b67cccf32522e.setContent(html_98dafbbb312d4a45ab8bd3cab8ac1c8d);
+        
+
+        marker_fb89e0d6d4e24e2791610287855bbd1f.bindPopup(popup_7e00e6e930da47599a4b67cccf32522e)
+        ;
+
+        
+    
+    
+            marker_fb89e0d6d4e24e2791610287855bbd1f.bindTooltip(
+                `<div>
+                     <b>Sarl </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6d76d07f83a04219be85c76aca05efa7 = L.marker(
+                [43.300484, 5.370532],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_b2af2c97864e47eea98016369d406eb4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_6d76d07f83a04219be85c76aca05efa7.setIcon(icon_b2af2c97864e47eea98016369d406eb4);
+        
+    
+        var popup_40c4b4a10c6a4d84b2b3d4ff06430d87 = L.popup({"maxWidth": 1000});
+
+        
+            var html_49f165d8c8a04789b500e17b8de2ba84 = $(`<div id="html_49f165d8c8a04789b500e17b8de2ba84" style="width: 100.0%; height: 100.0%;"><b><b>Adresse:</b> 26 RUE DE LA REPUBLIQUE 13002 MARSEILLE <br><b>Taille de façade:</b> 1,60 m<br><b>Largeur:</b> 1,30 m</div>`)[0];
+            popup_40c4b4a10c6a4d84b2b3d4ff06430d87.setContent(html_49f165d8c8a04789b500e17b8de2ba84);
+        
+
+        marker_6d76d07f83a04219be85c76aca05efa7.bindPopup(popup_40c4b4a10c6a4d84b2b3d4ff06430d87)
+        ;
+
+        
+    
+    
+            marker_6d76d07f83a04219be85c76aca05efa7.bindTooltip(
+                `<div>
+                     <b>NA</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_dce08f96a0994793a3f047ffdca5a243 = L.marker(
+                [43.291122, 5.356216],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_7a93c6c244b4430488ccdc4375967053 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_dce08f96a0994793a3f047ffdca5a243.setIcon(icon_7a93c6c244b4430488ccdc4375967053);
+        
+    
+        var popup_9085a83c155944dabe102cdc093c7e42 = L.popup({"maxWidth": 1000});
+
+        
+            var html_c480aa60619549f8828438f3d0634a98 = $(`<div id="html_c480aa60619549f8828438f3d0634a98" style="width: 100.0%; height: 100.0%;"><b>SARL </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 51 RUE DE SUEZ 13007 MARSEILLE <br><b>Taille de façade:</b> 10 m<br><b>Largeur:</b> 1 m<br><b>Superficie:</b> 7 m²</div>`)[0];
+            popup_9085a83c155944dabe102cdc093c7e42.setContent(html_c480aa60619549f8828438f3d0634a98);
+        
+
+        marker_dce08f96a0994793a3f047ffdca5a243.bindPopup(popup_9085a83c155944dabe102cdc093c7e42)
+        ;
+
+        
+    
+    
+            marker_dce08f96a0994793a3f047ffdca5a243.bindTooltip(
+                `<div>
+                     <b>SARL </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2f72d7801b3a41759b1d2619411204f1 = L.marker(
+                [43.291163, 5.356677],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_4742e04b1bc64069aedbdd116064a917 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_2f72d7801b3a41759b1d2619411204f1.setIcon(icon_4742e04b1bc64069aedbdd116064a917);
+        
+    
+        var popup_ee2282123ca24871b550b333325a5df0 = L.popup({"maxWidth": 1000});
+
+        
+            var html_b661a9e226c44f84b56f376bda1ebcf9 = $(`<div id="html_b661a9e226c44f84b56f376bda1ebcf9" style="width: 100.0%; height: 100.0%;"><b><b>Adresse:</b> 43 RUE DE SUEZ 13007 MARSEILLE <br><b>Taille de façade:</b> 1 m<br><b>Largeur:</b> 1,20 m<br><b>Superficie:</b> 4 m²</div>`)[0];
+            popup_ee2282123ca24871b550b333325a5df0.setContent(html_b661a9e226c44f84b56f376bda1ebcf9);
+        
+
+        marker_2f72d7801b3a41759b1d2619411204f1.bindPopup(popup_ee2282123ca24871b550b333325a5df0)
+        ;
+
+        
+    
+    
+            marker_2f72d7801b3a41759b1d2619411204f1.bindTooltip(
+                `<div>
+                     <b>NA</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2235a948b257411487eb44e357f3a47d = L.marker(
+                [43.29722, 5.365458],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_21fa6f19dd6d4a4c85716947d62f2003 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_2235a948b257411487eb44e357f3a47d.setIcon(icon_21fa6f19dd6d4a4c85716947d62f2003);
+        
+    
+        var popup_4f5014c07e9542e0868d3c05373be739 = L.popup({"maxWidth": 1000});
+
+        
+            var html_5b2115d1b5404b7c851cff726fd95c0e = $(`<div id="html_5b2115d1b5404b7c851cff726fd95c0e" style="width: 100.0%; height: 100.0%;"><b>SAS </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 1 RUE SAINT THOME 13002 MARSEILLE <br><b>Largeur:</b> 1 m<br><b>Superficie:</b> 3 m²</div>`)[0];
+            popup_4f5014c07e9542e0868d3c05373be739.setContent(html_5b2115d1b5404b7c851cff726fd95c0e);
+        
+
+        marker_2235a948b257411487eb44e357f3a47d.bindPopup(popup_4f5014c07e9542e0868d3c05373be739)
+        ;
+
+        
+    
+    
+            marker_2235a948b257411487eb44e357f3a47d.bindTooltip(
+                `<div>
+                     <b>SAS </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_33f56314edec45998400263a17ea0a68 = L.marker(
+                [43.306925, 5.373499],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_d03691dbaef4489188ac6c0bc38cf633 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_33f56314edec45998400263a17ea0a68.setIcon(icon_d03691dbaef4489188ac6c0bc38cf633);
+        
+    
+        var popup_594f4d070e62486b843c0512657713ff = L.popup({"maxWidth": 1000});
+
+        
+            var html_74c36ddec1064d4da990c1b6a84d1f3e = $(`<div id="html_74c36ddec1064d4da990c1b6a84d1f3e" style="width: 100.0%; height: 100.0%;"><b>Sarl </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 107 AV CAMILLE PELLETAN 13003 MARSEILLE <br><b>Taille de façade:</b> 1,50 m<br><b>Largeur:</b> 1,50 m</div>`)[0];
+            popup_594f4d070e62486b843c0512657713ff.setContent(html_74c36ddec1064d4da990c1b6a84d1f3e);
+        
+
+        marker_33f56314edec45998400263a17ea0a68.bindPopup(popup_594f4d070e62486b843c0512657713ff)
+        ;
+
+        
+    
+    
+            marker_33f56314edec45998400263a17ea0a68.bindTooltip(
+                `<div>
+                     <b>Sarl </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_dc2df9cb32994d8e8d9c91ae84d5504d = L.marker(
+                [43.337354, 5.356942],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_ae43ae5ea31b44ec87fcd4a43b17213e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_dc2df9cb32994d8e8d9c91ae84d5504d.setIcon(icon_ae43ae5ea31b44ec87fcd4a43b17213e);
+        
+    
+        var popup_2c223a199e8d422a89c30a8566187be2 = L.popup({"maxWidth": 1000});
+
+        
+            var html_654d2f16105041c489d94d7e4fa638ec = $(`<div id="html_654d2f16105041c489d94d7e4fa638ec" style="width: 100.0%; height: 100.0%;"><b><b>Adresse:</b> 35 BD BERNABO 13015 MARSEILLE <br><b>Taille de façade:</b> 2 m<br><b>Largeur:</b> 1 m</div>`)[0];
+            popup_2c223a199e8d422a89c30a8566187be2.setContent(html_654d2f16105041c489d94d7e4fa638ec);
+        
+
+        marker_dc2df9cb32994d8e8d9c91ae84d5504d.bindPopup(popup_2c223a199e8d422a89c30a8566187be2)
+        ;
+
+        
+    
+    
+            marker_dc2df9cb32994d8e8d9c91ae84d5504d.bindTooltip(
+                `<div>
+                     <b>NA</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_47a62c317ce942d48eb95cb483ac9217 = L.marker(
+                [43.299841, 5.38447],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_079311c402404f448544a92467c71c4c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_47a62c317ce942d48eb95cb483ac9217.setIcon(icon_079311c402404f448544a92467c71c4c);
+        
+    
+        var popup_790e41a1cd0d4be0941cb56900fad706 = L.popup({"maxWidth": 1000});
+
+        
+            var html_58e878ecf4ef40dcbbf9acfc4aae96eb = $(`<div id="html_58e878ecf4ef40dcbbf9acfc4aae96eb" style="width: 100.0%; height: 100.0%;"><b><b>Adresse:</b> 7 RUE SAINT BAZILE 13001 MARSEILLE </div>`)[0];
+            popup_790e41a1cd0d4be0941cb56900fad706.setContent(html_58e878ecf4ef40dcbbf9acfc4aae96eb);
+        
+
+        marker_47a62c317ce942d48eb95cb483ac9217.bindPopup(popup_790e41a1cd0d4be0941cb56900fad706)
+        ;
+
+        
+    
+    
+            marker_47a62c317ce942d48eb95cb483ac9217.bindTooltip(
+                `<div>
+                     <b>NA</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cc5476cf8a5a4b1f8d6cf7831b3f0538 = L.marker(
+                [43.360837, 5.313555],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_835507d05f9446748e8b28dd26faa907 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_cc5476cf8a5a4b1f8d6cf7831b3f0538.setIcon(icon_835507d05f9446748e8b28dd26faa907);
+        
+    
+        var popup_5ddfc8ffb7ec4cc78f1f99494ca61cfd = L.popup({"maxWidth": 1000});
+
+        
+            var html_d17e87ea44f04b9c814d8646c6596dd2 = $(`<div id="html_d17e87ea44f04b9c814d8646c6596dd2" style="width: 100.0%; height: 100.0%;"><b>SAS </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 72 PLAGE DE L’ESTAQUE 13016 MARSEILLE </div>`)[0];
+            popup_5ddfc8ffb7ec4cc78f1f99494ca61cfd.setContent(html_d17e87ea44f04b9c814d8646c6596dd2);
+        
+
+        marker_cc5476cf8a5a4b1f8d6cf7831b3f0538.bindPopup(popup_5ddfc8ffb7ec4cc78f1f99494ca61cfd)
+        ;
+
+        
+    
+    
+            marker_cc5476cf8a5a4b1f8d6cf7831b3f0538.bindTooltip(
+                `<div>
+                     <b>SAS </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_05206fb51df04181b67a049f23695c6d = L.marker(
+                [43.280809, 5.379236],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_2eb925017c8a4905aa15c5e0a2224a34 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_05206fb51df04181b67a049f23695c6d.setIcon(icon_2eb925017c8a4905aa15c5e0a2224a34);
+        
+    
+        var popup_2ddd7e78e55d4fd38f7dad636bc10494 = L.popup({"maxWidth": 1000});
+
+        
+            var html_34dd724bb4e7435aab63eb33f21ae642 = $(`<div id="html_34dd724bb4e7435aab63eb33f21ae642" style="width: 100.0%; height: 100.0%;"><b>Massilia Snc </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 7 BD NOTRE DAME 13006 MARSEILLE <br><b>Taille de façade:</b> 5 m<br><b>Largeur:</b> 2,30 m</div>`)[0];
+            popup_2ddd7e78e55d4fd38f7dad636bc10494.setContent(html_34dd724bb4e7435aab63eb33f21ae642);
+        
+
+        marker_05206fb51df04181b67a049f23695c6d.bindPopup(popup_2ddd7e78e55d4fd38f7dad636bc10494)
+        ;
+
+        
+    
+    
+            marker_05206fb51df04181b67a049f23695c6d.bindTooltip(
+                `<div>
+                     <b>Massilia Snc </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4c909a7ffba94c5fb261a6edd4a28095 = L.marker(
+                [43.307889, 5.367706],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_be5ca39d2c774dffac84443b1ffd0d76 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_4c909a7ffba94c5fb261a6edd4a28095.setIcon(icon_be5ca39d2c774dffac84443b1ffd0d76);
+        
+    
+        var popup_ff886b0519f84a8baaf099a6378e0750 = L.popup({"maxWidth": 1000});
+
+        
+            var html_54ae6cd925734718bd2ee76ff372daae = $(`<div id="html_54ae6cd925734718bd2ee76ff372daae" style="width: 100.0%; height: 100.0%;"><b><b>Adresse:</b> 25 BD DU DUNKERQUE 13002 MARSEILLE </div>`)[0];
+            popup_ff886b0519f84a8baaf099a6378e0750.setContent(html_54ae6cd925734718bd2ee76ff372daae);
+        
+
+        marker_4c909a7ffba94c5fb261a6edd4a28095.bindPopup(popup_ff886b0519f84a8baaf099a6378e0750)
+        ;
+
+        
+    
+    
+            marker_4c909a7ffba94c5fb261a6edd4a28095.bindTooltip(
+                `<div>
+                     <b>NA</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b4782f97219b43329e26f5669d6518f0 = L.marker(
+                [43.281251, 5.3786],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_08a0ca07fc3240bf8dba5d729e140858 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_b4782f97219b43329e26f5669d6518f0.setIcon(icon_08a0ca07fc3240bf8dba5d729e140858);
+        
+    
+        var popup_067f11a931ee4464ba787cc27e66ee05 = L.popup({"maxWidth": 1000});
+
+        
+            var html_01cc6e8a656343efb170a0854b5cf307 = $(`<div id="html_01cc6e8a656343efb170a0854b5cf307" style="width: 100.0%; height: 100.0%;"><b>Sas </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 248 RUE PARADIS 13006 MARSEILLE <br><b>Taille de façade:</b> 2,60 m<br><b>Superficie:</b> 4 m²</div>`)[0];
+            popup_067f11a931ee4464ba787cc27e66ee05.setContent(html_01cc6e8a656343efb170a0854b5cf307);
+        
+
+        marker_b4782f97219b43329e26f5669d6518f0.bindPopup(popup_067f11a931ee4464ba787cc27e66ee05)
+        ;
+
+        
+    
+    
+            marker_b4782f97219b43329e26f5669d6518f0.bindTooltip(
+                `<div>
+                     <b>Sas </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e14f7db3164a4f679980259dba1d86cc = L.marker(
+                [43.299411, 5.385856],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_86b3b0cdfa574ed2a0c99eca39f04e9e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_e14f7db3164a4f679980259dba1d86cc.setIcon(icon_86b3b0cdfa574ed2a0c99eca39f04e9e);
+        
+    
+        var popup_b8e6f38097f2410ab20378b7f3e3875e = L.popup({"maxWidth": 1000});
+
+        
+            var html_3fca3ca6e0224750a2632f9e865db1e6 = $(`<div id="html_3fca3ca6e0224750a2632f9e865db1e6" style="width: 100.0%; height: 100.0%;"><b><b>Adresse:</b> 4 RUE CONSOLAT 13001 MARSEILLE <br><b>Taille de façade:</b> 5,40 m<br><b>Largeur:</b> 1,30 m<br><b>Superficie:</b> 7 m²</div>`)[0];
+            popup_b8e6f38097f2410ab20378b7f3e3875e.setContent(html_3fca3ca6e0224750a2632f9e865db1e6);
+        
+
+        marker_e14f7db3164a4f679980259dba1d86cc.bindPopup(popup_b8e6f38097f2410ab20378b7f3e3875e)
+        ;
+
+        
+    
+    
+            marker_e14f7db3164a4f679980259dba1d86cc.bindTooltip(
+                `<div>
+                     <b>NA</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_031dc58132fc467c90901ef33bcd851d = L.marker(
+                [43.301307, 5.389653],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_783233f5fccf4bb1897bdf13d3a6aed9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_031dc58132fc467c90901ef33bcd851d.setIcon(icon_783233f5fccf4bb1897bdf13d3a6aed9);
+        
+    
+        var popup_810f152f49d247f8a7a47ddcb4f103a5 = L.popup({"maxWidth": 1000});
+
+        
+            var html_b9ea3a07de5f4edebd03f5cb3c113ebf = $(`<div id="html_b9ea3a07de5f4edebd03f5cb3c113ebf" style="width: 100.0%; height: 100.0%;"><b>Sas -compte </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 2 RUE CONSOLAT 13001 MARSEILLE <br><b>Taille de façade:</b> 4 m<br><b>Largeur:</b> 1,40 m<br><b>Superficie:</b> 6 m²</div>`)[0];
+            popup_810f152f49d247f8a7a47ddcb4f103a5.setContent(html_b9ea3a07de5f4edebd03f5cb3c113ebf);
+        
+
+        marker_031dc58132fc467c90901ef33bcd851d.bindPopup(popup_810f152f49d247f8a7a47ddcb4f103a5)
+        ;
+
+        
+    
+    
+            marker_031dc58132fc467c90901ef33bcd851d.bindTooltip(
+                `<div>
+                     <b>Sas -compte </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_68771c0fc3af4726a03b001250bfbb7f = L.marker(
+                [43.290791, 5.359301],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_f6164f866cfc423f8f7a31adeaa29209 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_68771c0fc3af4726a03b001250bfbb7f.setIcon(icon_f6164f866cfc423f8f7a31adeaa29209);
+        
+    
+        var popup_8ede92ea9a3645feac9344ba1d2a902d = L.popup({"maxWidth": 1000});
+
+        
+            var html_e23becd224224bf6827d057fc005a668 = $(`<div id="html_e23becd224224bf6827d057fc005a668" style="width: 100.0%; height: 100.0%;"><b>SAS </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 23 AV PASTEUR 13007 MARSEILLE <br><b>Taille de façade:</b> 3 m<br><b>Largeur:</b> 1 m<br><b>Superficie:</b> 3 m²</div>`)[0];
+            popup_8ede92ea9a3645feac9344ba1d2a902d.setContent(html_e23becd224224bf6827d057fc005a668);
+        
+
+        marker_68771c0fc3af4726a03b001250bfbb7f.bindPopup(popup_8ede92ea9a3645feac9344ba1d2a902d)
+        ;
+
+        
+    
+    
+            marker_68771c0fc3af4726a03b001250bfbb7f.bindTooltip(
+                `<div>
+                     <b>SAS </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_89cb3a13efb7420db61fdd6b4aed1dc2 = L.marker(
+                [43.293051, 5.37557],
+                {}
+            ).addTo(map_05b987dba0ba49b2982567f594058d1f);
+        
+    
+            var icon_d927cf017d2e4e02af54d08b7f5beb58 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "university", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_89cb3a13efb7420db61fdd6b4aed1dc2.setIcon(icon_d927cf017d2e4e02af54d08b7f5beb58);
+        
+    
+        var popup_56ceae5ec97c40e599c6f55c1475f7ed = L.popup({"maxWidth": 1000});
+
+        
+            var html_3d7d678b6ecc47deafd8bcb9f80cf7ad = $(`<div id="html_3d7d678b6ecc47deafd8bcb9f80cf7ad" style="width: 100.0%; height: 100.0%;"><b>A2 Sarl </b><b>   |   TERRASSE</b><br><b>Adresse:</b> 46 RUE FRANCIS DAVSO 13001 MARSEILLE <br><b>Taille de façade:</b> 5 m<br><b>Largeur:</b> 1 m<br><b>Superficie:</b> 5 m²</div>`)[0];
+            popup_56ceae5ec97c40e599c6f55c1475f7ed.setContent(html_3d7d678b6ecc47deafd8bcb9f80cf7ad);
+        
+
+        marker_89cb3a13efb7420db61fdd6b4aed1dc2.bindPopup(popup_56ceae5ec97c40e599c6f55c1475f7ed)
+        ;
+
+        
+    
+    
+            marker_89cb3a13efb7420db61fdd6b4aed1dc2.bindTooltip(
+                `<div>
+                     <b>A2 Sarl </b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
