@@ -1,5 +1,7 @@
 #!/bin/bash
-scriptdir=`dirname "$BASH_SOURCE"`
+
+echo "starting up : creating folders"
+bash startup.sh
 
 rm src/NLP/data/toPredict/*.txt
 mkdir src/NLP/data/temp_for_extraction
