@@ -41,7 +41,7 @@ if [ "$arg2" == "yes" ]; then
         rm "$scriptdir"/terrasses.json #fichier contenant les instances de la carte
         echo '{"terrasses": []}' >> "$scriptdir"/terrasses.json
         echo 'Predicting ...'
-        for file in "$arg1"* ; do
+        for file in data/toPredict/* ; do
             [ -e "$file" ] || continue
             name=${file##*/}
             base=${name%.txt}
@@ -65,7 +65,7 @@ elif [ "$arg2" == "no" ] && [ "$arg3" == "yes" ]; then
     rm "$scriptdir"/terrasses.json #fichier contenant les instances de la carte
     echo '{"terrasses": []}' >> "$scriptdir"/terrasses.json
     echo "Just predicting ..."
-    for file in "$arg1"* ; do
+    for file in data/toPredict/* ; do
         [ -e "$file" ] || continue
         name=${file##*/}
         base=${name%.txt}

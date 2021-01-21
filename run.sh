@@ -1,22 +1,14 @@
 #!/bin/bash
-echo 'installation des requirements'
 scriptdir=`dirname "$BASH_SOURCE"`
 
-rm data/tokens/*
-rm data/out/*
-#python3 -m venv venv
-#source venv/bin/activate
+rm src/NLP/data/toPredict/*.txt
+mkdir src/NLP/data/temp_for_extraction
+unzip src/NLP/data/toPredict.zip -d src/NLP/data/temp_for_extraction/
+cp src/NLP/data/temp_for_extraction/toPredict/*.txt src/NLP/data/toPredict/
+rm -rf src/NLP/data/temp_for_extraction
 
-echo "Extracting and segmenting pdf"
-python3 src/extract_pdfplumber.py
-python3 src/fuse_jsons.py
-echo "extraction done\n"
-
-python3 src/getTerrassesPizzas.py
-python3 src/prepare_token.py
-bash clean_tokens.sh
 cd src/NLP/
-bash run.sh -f data/toPredict/ -t yes -p yes
+bash run.sh -f data/toPredict/ -t no -p yes
 cd ../../
 python3 src/add_geoloc.py
 python3 src/toMap.py
