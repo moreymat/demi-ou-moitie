@@ -9,7 +9,6 @@ def store_in_marseille(x, y):
     cx = 43.2961743
     cy = 5.3699525
 
-
     if math.sqrt((x - cx) ** 2 + (y - cy) ** 2) < 0.15:
         return True
     else:
@@ -95,7 +94,5 @@ def get_interactive_map(json_path):
 
 
 if __name__ == "__main__":
-    map = get_interactive_map(
-        r"data/out/geoloc.json"
-    )
+    map = get_interactive_map(r"data/out/geoloc.json")
     map.save("index.html")

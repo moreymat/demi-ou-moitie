@@ -38,7 +38,7 @@ def extract_text_from_json(json_path):
     return result
 
 
-#Fuse all the json into one
+# Fuse all the json into one
 def fuse_json(repertory_path):
     data_path = Path(repertory_path)
     reps = os.listdir(data_path)
@@ -61,14 +61,13 @@ def fuse_json(repertory_path):
         datas["content"] = data
         json_list.append(datas)
 
-
     all_datas["data"] = json_list
 
     with open(r"data/out/all_data.json", "w", encoding="utf-8") as outfile:
         json.dump(all_datas, outfile)
 
 
-#extract text from the fused json
+# extract text from the fused json
 def extract_text_from_all_json(json_path):
 
     with open(json_path) as json_file:
@@ -100,17 +99,19 @@ def extract_text_from_all_json(json_path):
     print("Nombre d'arrété dans ", json_path, ": ", nb_arr)
     return result
 
-#entrée: un mot avec une apostrophe | ie. "l'article"
-#sortie: deux mots séparés par l'apostrope | ie. "l'" et "article"
+
+# entrée: un mot avec une apostrophe | ie. "l'article"
+# sortie: deux mots séparés par l'apostrope | ie. "l'" et "article"
 def split_apostrophe(word):
     for i, char in enumerate(word):
         if char == "'":
-            return word[:i+1], word[i+1:]
+            return word[: i + 1], word[i + 1 :]
     print("oops")
     return 1
 
-#Entrée: arrete sous format json
-#Sortie: arrete sous format .txt séparé en entité nommé pour AllenNLP
+
+# Entrée: arrete sous format json
+# Sortie: arrete sous format .txt séparé en entité nommé pour AllenNLP
 def prepare_tokens(arrete):
 
     f = open(

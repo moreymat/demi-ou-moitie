@@ -47,7 +47,7 @@ def page_has_column(page):
     if table_is_empty(table_middle) and not table_is_empty(table_left):
         return True
     else:
-        #print("Remove page n°", page.page_number)
+        # print("Remove page n°", page.page_number)
         return False
 
 
@@ -323,26 +323,25 @@ reps = os.listdir(data_path)
 
 for path in reps:
 
-	pdf_path = data_path / path
+    pdf_path = data_path / path
 
-	if str(pdf_path).endswith(".pdf"):
+    if str(pdf_path).endswith(".pdf"):
 
-		pdf = pdfplumber.open(pdf_path)
+        pdf = pdfplumber.open(pdf_path)
 
-		pdf_name = os.path.splitext(path)[0]
-		print("Working on", pdf_name, "...")
+        pdf_name = os.path.splitext(path)[0]
+        print("Working on", pdf_name, "...")
 
-		clean_pdf = pdf_cleaner(pdf)
-		data = get_data_from_clean_pdf(clean_pdf)
+        clean_pdf = pdf_cleaner(pdf)
+        data = get_data_from_clean_pdf(clean_pdf)
 
-		with open(r"data/out/" + pdf_name + r".json", "w", encoding="utf-8") as outfile:
-			json.dump(data, outfile)
+        with open(r"data/out/" + pdf_name + r".json", "w", encoding="utf-8") as outfile:
+            json.dump(data, outfile)
 
-		print("done")
-	else:
-		print("not doing", pdf_path)
-    	
-     
+        print("done")
+    else:
+        print("not doing", pdf_path)
+
 
 stop = timeit.default_timer()
 

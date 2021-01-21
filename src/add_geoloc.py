@@ -20,19 +20,22 @@ for ad in range(len(liste_adr)):
         url = "https://api-adresse.data.gouv.fr/search/?q="
         for i in range(len(adr_array) - 1):
             ### partie de remplacement des caractères spéciaux, si y en a qui y sont pas les rajouter
-            a = adr_array[i].replace("’", "")
-            b = a.replace("è", "e")
-            c = b.replace("é", "e")
-            d = c.replace("ë", "e")
-            e = d.replace("ç", "c")
-            f = e.replace("Â", "A")
-            g = f.replace("Ê", "E")
-            h = g.replace("È", "E")
-            i = h.replace("Ë", "E")
-            j = i.replace("É", "E")
-            k = j.replace("–", "")
+            adr_norm = (
+                adr_array[i]
+                .replace("’", "")
+                .replace("è", "e")
+                .replace("é", "e")
+                .replace("ë", "e")
+                .replace("ç", "c")
+                .replace("Â", "A")
+                .replace("Ê", "E")
+                .replace("È", "E")
+                .replace("Ë", "E")
+                .replace("É", "E")
+                .replace("–", "")
+            )
             ###
-            url += k + "+"
+            url += adr_norm + "+"
         url += adr_array[len(adr_array) - 1]
         print(ad)
         # print(url)
@@ -40,11 +43,11 @@ for ad in range(len(liste_adr)):
         response = urllib.request.urlopen(req)
         data1 = response.read()
         values = json.loads(data1)
-        for f in range(len(values["features"])):
+        for f_i in range(len(values["features"])):
             tab = [
-                    values["features"][f]["geometry"]["coordinates"][1],
-                    values["features"][f]["geometry"]["coordinates"][0],
-                ]
+                values["features"][f_i]["geometry"]["coordinates"][1],
+                values["features"][f_i]["geometry"]["coordinates"][0],
+            ]
         listeCoordinates.append(tab)
 
 
