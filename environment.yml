@@ -6,9 +6,12 @@ dependencies:
   - pip
   - pandas
   - pip:
+      - allennlp  # proj
       - black
       - flake8
+      - folium  # proj
       - isort
       - mypy
+      - pdfplumber  # proj
       - pycodestyle
       - pyflakes

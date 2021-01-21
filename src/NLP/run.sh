@@ -20,8 +20,20 @@ done
 
 
 if [ "$arg2" == "yes" ]; then
-    rm "$scriptdir"/data/source/addons_train/*.txt
-    rm "$scriptdir"/data/source/addons_validation/*.txt
+    # ensure empty folder addons_train
+    if [[ -d "$scriptdir"/data/source/addons_train ]]
+    then
+        rm "$scriptdir"/data/source/addons_train/*.txt
+    else
+        mkdir "$scriptdir"/data/source/addons_train
+    fi
+    # ensure empty folder addons_validation
+    if [[ -d "$scriptdir"/data/source/addons_validation ]]
+    then
+        rm "$scriptdir"/data/source/addons_validation/*.txt
+    else
+        mkdir "$scriptdir"/data/source/addons_validation
+    fi
     echo "Training & Predicting"
     echo 'Creating dataset ...'
     cd "$scriptdir"/data/source/
