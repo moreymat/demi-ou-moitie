@@ -6,5 +6,5 @@ allennlp predict \
   --predictor enp_fr_predictor \
   --use-dataset-reader \
   --silent \
-  /tmp/tagging/lstm/ \
-  data/toPredict/"$2"
+  ./tmp/tagging/lstm/ \
+  ./data/toPredict/"$2"

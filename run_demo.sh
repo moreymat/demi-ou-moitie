@@ -1,10 +1,7 @@
 #!/bin/bash
-scriptdir=`dirname "$BASH_SOURCE"`
 
-rm data/tokens/*
-rm data/out/*
-#python3 -m venv venv
-#source venv/bin/activate
+echo "starting up : creating folders"
+bash startup.sh
 
 echo "Extracting and segmenting pdf"
 python3 src/extract_pdfplumber.py
