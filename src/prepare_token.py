@@ -1,25 +1,20 @@
 import json
 
-# entrée: un mot avec une apostrophe | ie. "l'article"
-# sortie: deux mots séparés par l'apostrope | ie. "l'" et "article"
+#entrée: un mot avec une apostrophe | ie. "l'article"
+#sortie: deux mots séparés par l'apostrope | ie. "l'" et "article"
 def split_apostrophe(word):
+    for i, char in enumerate(word):
+        if char == "'":
+            return word[:i+1], word[i+1:]
+    print("oops")
+    return 1
 
-    try:
-        index = word.index("'")
-        return word[: index + 1], word[index + 1 :]
-    except ValueError:
-        print("Erreur: pas d'apostrophe")
-        return word
-
-
-# Entrée: arrete sous format json
-# Sortie: arrete sous format .txt séparé en entité nommé pour AllenNLP
+#Entrée: arrete sous format json
+#Sortie: arrete sous format .txt séparé en entité nommé pour AllenNLP
 def prepare_tokens(arrete):
 
     f = open(
-        r"data/test/"
-        # Exemple de nom de fichier: "2017_01461_VDM"
-        + arrete["title"][0]["text"][0:17] + ".txt",
+        r"data/tokens/" + arrete["title"][0]["text"][0:17] + ".txt",
         "w",
         encoding="utf-8",
     )
@@ -57,7 +52,7 @@ def prepare_tokens(arrete):
                     else:
                         flag_line = False
                         if word != "":
-                            result += word + " " + "O" + "\n"
+                                result += word + " " + "O" + "\n"
 
     if not flag_line:
         result += "\n"
